@@ -56,7 +56,8 @@ document.addEventListener('DOMContentLoaded', () => {
   function renderBoard() {
     tileContainer.innerHTML = '';
     
-    const gap = 10;
+    const boardEl = document.querySelector('.game-board');
+    const gap = parseFloat(getComputedStyle(boardEl).gap) || 10;
     
     for (let r = 0; r < boardSize; r++) {
       for (let c = 0; c < boardSize; c++) {

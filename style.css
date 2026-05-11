@@ -19,7 +19,7 @@
   --tile-color-2048: #ef4444;
   --tile-color-super: #dc2626;
 
-  --font-family: 'Inter', sans-serif;
+  --font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 }
 
 * {
@@ -44,6 +44,7 @@ body {
   width: 100%;
   max-width: 500px;
   padding: 20px;
+  padding: 20px env(safe-area-inset-right, 20px) 20px env(safe-area-inset-left, 20px);
   display: flex;
   flex-direction: column;
   gap: 20px;
@@ -61,11 +62,13 @@ body {
   background: linear-gradient(to right, #38bdf8, #c084fc);
   -webkit-background-clip: text;
   color: transparent;
+  line-height: 1.1;
 }
 
 .scores {
   display: flex;
   gap: 10px;
+  flex-shrink: 0;
 }
 
 .score-container {
@@ -76,7 +79,7 @@ body {
   flex-direction: column;
   align-items: center;
   position: relative;
-  min-width: 80px;
+  min-width: 70px;
 }
 
 .score-label {
@@ -111,11 +114,13 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: 10px;
 }
 
 .subtitle {
   font-size: 1rem;
   color: #cbd5e1;
+  line-height: 1.4;
 }
 
 .restart-btn, .retry-btn {
@@ -192,6 +197,123 @@ body {
 
 @media (max-width: 500px) {
   .tile-inner {
+    font-size: 1.5rem;
+  }
+  
+  .tile-128 .tile-inner,
+  .tile-256 .tile-inner,
+  .tile-512 .tile-inner { font-size: 1.2rem; }
+
+  .tile-1024 .tile-inner,
+  .tile-2048 .tile-inner,
+  .tile-super .tile-inner { font-size: 0.9rem; }
+  
+  .title {
+    font-size: 2.2rem;
+  }
+
+  .score-container {
+    padding: 6px 12px;
+    min-width: 60px;
+  }
+
+  .score-value {
+    font-size: 1rem;
+  }
+
+  .score-label {
+    font-size: 0.65rem;
+  }
+
+  .controls {
+    flex-wrap: wrap;
+  }
+
+  .subtitle {
+    font-size: 0.85rem;
+  }
+
+  .restart-btn, .retry-btn {
+    padding: 8px 14px;
+    font-size: 0.85rem;
+  }
+
+  .game-board-container {
+    padding: 8px;
+  }
+
+  .game-board {
+    gap: 8px;
+  }
+
+  .tile-container {
+    top: 8px;
+    left: 8px;
+    right: 8px;
+    bottom: 8px;
+  }
+
+  .game-message p {
+    font-size: 2rem;
+  }
+}
+
+@media (max-width: 380px) {
+  .game-container {
+    padding: 12px env(safe-area-inset-right, 12px) 12px env(safe-area-inset-left, 12px);
+    gap: 12px;
+  }
+
+  .title {
+    font-size: 1.8rem;
+  }
+
+  .score-container {
+    padding: 4px 8px;
+    min-width: 50px;
+  }
+
+  .score-value {
+    font-size: 0.85rem;
+  }
+
+  .subtitle {
+    font-size: 0.75rem;
+  }
+
+  .restart-btn, .retry-btn {
+    padding: 6px 10px;
+    font-size: 0.75rem;
+  }
+
+  .tile-inner {
+    font-size: 1.1rem;
+  }
+
+  .tile-128 .tile-inner,
+  .tile-256 .tile-inner,
+  .tile-512 .tile-inner { font-size: 0.9rem; }
+
+  .tile-1024 .tile-inner,
+  .tile-2048 .tile-inner,
+  .tile-super .tile-inner { font-size: 0.7rem; }
+
+  .game-board-container {
+    padding: 6px;
+  }
+
+  .game-board {
+    gap: 6px;
+  }
+
+  .tile-container {
+    top: 6px;
+    left: 6px;
+    right: 6px;
+    bottom: 6px;
+  }
+
+  .game-message p {
     font-size: 1.5rem;
   }
 }
