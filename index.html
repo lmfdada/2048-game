@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>2048 - Premium Edition</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+    <script type="module" crossorigin src="./assets/index-BOVq0rwn.js"></script>
+    <link rel="stylesheet" crossorigin href="./assets/index-DF8PWtZg.css">
+  </head>
+  <body>
+    <div class="game-container">
+      <header class="header">
+        <h1 class="title">2048</h1>
+        <div class="scores">
+          <div class="score-container">
+            <div class="score-label">SCORE</div>
+            <div class="score-value" id="score">0</div>
+          </div>
+          <div class="score-container">
+            <div class="score-label">BEST</div>
+            <div class="score-value" id="best-score">0</div>
+          </div>
+        </div>
+      </header>
+
+      <div class="controls">
+        <p class="subtitle">Join the numbers and get to the <strong>2048 tile!</strong></p>
+        <button class="restart-btn" id="restart-btn">New Game</button>
+      </div>
+
+      <div class="game-board-container">
+        <div class="game-board" id="game-board">
+          <!-- Background Grid Cells -->
+          <div class="grid-cell"></div><div class="grid-cell"></div><div class="grid-cell"></div><div class="grid-cell"></div>
+          <div class="grid-cell"></div><div class="grid-cell"></div><div class="grid-cell"></div><div class="grid-cell"></div>
+          <div class="grid-cell"></div><div class="grid-cell"></div><div class="grid-cell"></div><div class="grid-cell"></div>
+          <div class="grid-cell"></div><div class="grid-cell"></div><div class="grid-cell"></div><div class="grid-cell"></div>
+        </div>
+        <div class="tile-container" id="tile-container">
+          <!-- Tiles will be dynamically injected here -->
+        </div>
+
+        <div class="game-message" id="game-message">
+          <p id="game-message-text">Game Over!</p>
+          <div class="lower">
+            <button class="retry-btn" id="retry-btn">Try again</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+  </body>
+</html>
