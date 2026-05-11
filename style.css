@@ -34,10 +34,11 @@ body {
   font-family: var(--font-family);
   display: flex;
   justify-content: center;
-  align-items: center;
-  min-height: 100vh;
+  align-items: flex-start;
+  min-height: 100dvh;
   margin: 0;
-  touch-action: none; /* Prevent scroll on touch devices when swiping */
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
 }
 
 .game-container {
@@ -144,10 +145,14 @@ body {
   position: relative;
   width: 100%;
   aspect-ratio: 1;
+  max-height: calc(100dvh - 170px);
   background-color: var(--board-bg);
   border-radius: 12px;
   padding: 10px;
   overflow: hidden;
+  touch-action: none;
+  user-select: none;
+  -webkit-user-select: none;
 }
 
 .game-board {
@@ -196,6 +201,25 @@ body {
 }
 
 @media (max-width: 500px) {
+  .game-container {
+    gap: 14px;
+  }
+
+  .game-board-container {
+    padding: 8px;
+  }
+
+  .game-board {
+    gap: 8px;
+  }
+
+  .tile-container {
+    top: 8px;
+    left: 8px;
+    right: 8px;
+    bottom: 8px;
+  }
+
   .tile-inner {
     font-size: 1.5rem;
   }
@@ -238,21 +262,6 @@ body {
     font-size: 0.85rem;
   }
 
-  .game-board-container {
-    padding: 8px;
-  }
-
-  .game-board {
-    gap: 8px;
-  }
-
-  .tile-container {
-    top: 8px;
-    left: 8px;
-    right: 8px;
-    bottom: 8px;
-  }
-
   .game-message p {
     font-size: 2rem;
   }
@@ -260,12 +269,16 @@ body {
 
 @media (max-width: 380px) {
   .game-container {
-    padding: 12px env(safe-area-inset-right, 12px) 12px env(safe-area-inset-left, 12px);
-    gap: 12px;
+    padding: 10px env(safe-area-inset-right, 10px) 10px env(safe-area-inset-left, 10px);
+    gap: 10px;
   }
 
   .title {
-    font-size: 1.8rem;
+    font-size: 1.6rem;
+  }
+
+  .scores {
+    gap: 6px;
   }
 
   .score-container {
@@ -286,18 +299,6 @@ body {
     font-size: 0.75rem;
   }
 
-  .tile-inner {
-    font-size: 1.1rem;
-  }
-
-  .tile-128 .tile-inner,
-  .tile-256 .tile-inner,
-  .tile-512 .tile-inner { font-size: 0.9rem; }
-
-  .tile-1024 .tile-inner,
-  .tile-2048 .tile-inner,
-  .tile-super .tile-inner { font-size: 0.7rem; }
-
   .game-board-container {
     padding: 6px;
   }
@@ -312,6 +313,18 @@ body {
     right: 6px;
     bottom: 6px;
   }
+
+  .tile-inner {
+    font-size: 1.1rem;
+  }
+
+  .tile-128 .tile-inner,
+  .tile-256 .tile-inner,
+  .tile-512 .tile-inner { font-size: 0.9rem; }
+
+  .tile-1024 .tile-inner,
+  .tile-2048 .tile-inner,
+  .tile-super .tile-inner { font-size: 0.7rem; }
 
   .game-message p {
     font-size: 1.5rem;
