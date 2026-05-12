@@ -13,10 +13,18 @@ document.addEventListener('DOMContentLoaded', () => {
   const retryBtn = document.getElementById('retry-btn');
   const gameMessage = document.getElementById('game-message');
   const gameMessageText = document.getElementById('game-message-text');
+  const gameSelect = document.getElementById('game-select');
 
   bestScoreEl.textContent = bestScore;
 
   function initGame() {
+    // Current game is 2048
+    if (gameSelect.value === '2048') {
+      init2048();
+    }
+  }
+
+  function init2048() {
     board = Array(boardSize).fill(null).map(() => Array(boardSize).fill(null));
     score = 0;
     hasWon = false;
@@ -29,6 +37,18 @@ document.addEventListener('DOMContentLoaded', () => {
     addRandomTile();
     renderBoard();
   }
+
+  gameSelect.addEventListener('change', (e) => {
+    const selectedGame = e.target.value;
+    console.log(`Switching to ${selectedGame}`);
+    // In the future, this would load different game modules or hide/show game boards
+    if (selectedGame === '2048') {
+      initGame();
+    } else {
+      alert('More games coming soon!');
+      gameSelect.value = '2048'; // Reset to 2048 for now
+    }
+  });
 
   function addRandomTile() {
     const emptyCells = [];
