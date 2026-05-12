@@ -52,6 +52,16 @@ document.addEventListener('DOMContentLoaded', () => {
   const tetrisRetryBtn = document.getElementById('tetris-retry-btn');
   const gameInstructions = document.getElementById('game-instructions');
 
+  // Mobile control elements
+  const mobileControls = document.getElementById('mobile-controls');
+  const tetrisExtraControls = document.getElementById('tetris-extra-controls');
+  const ctrlUp = document.getElementById('ctrl-up');
+  const ctrlDown = document.getElementById('ctrl-down');
+  const ctrlLeft = document.getElementById('ctrl-left');
+  const ctrlRight = document.getElementById('ctrl-right');
+  const ctrlRotate = document.getElementById('ctrl-rotate');
+  const ctrlDrop = document.getElementById('ctrl-drop');
+
   let currentGame = '2048';
 
   const instructionsData = {
@@ -153,6 +163,17 @@ document.addEventListener('DOMContentLoaded', () => {
     const selectedGame = gameSelect.value;
     updateInstructions(selectedGame);
     
+    // Show mobile controls on touch devices
+    const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+    if (isTouchDevice) {
+      mobileControls.classList.remove('hidden');
+      if (selectedGame === 'tetris') {
+        tetrisExtraControls.classList.remove('hidden');
+      } else {
+        tetrisExtraControls.classList.add('hidden');
+      }
+    }
+
     if (selectedGame === '2048') {
       currentGame = '2048';
       gameTitle.textContent = '2048';
@@ -991,6 +1012,44 @@ document.addEventListener('DOMContentLoaded', () => {
   retryBtn.addEventListener('click', initGame);
   snakeRetryBtn.addEventListener('click', initGame);
   tetrisRetryBtn.addEventListener('click', initGame);
+
+  // Mobile Button Event Handlers
+  function handleControl(action) {
+    if (currentGame === '2048') {
+      if (isGameOver) return;
+      switch (action) {
+        case 'up': move(0); break;
+        case 'right': move(1); break;
+        case 'down': move(2); break;
+        case 'left': move(3); break;
+      }
+    } else if (currentGame === 'snake') {
+      if (!snakeInterval) return;
+      switch (action) {
+        case 'up': if (direction !== 'down') nextDirection = 'up'; break;
+        case 'right': if (direction !== 'left') nextDirection = 'right'; break;
+        case 'down': if (direction !== 'up') nextDirection = 'down'; break;
+        case 'left': if (direction !== 'right') nextDirection = 'left'; break;
+      }
+    } else if (currentGame === 'tetris') {
+      if (!tetrisInterval) return;
+      switch (action) {
+        case 'up': rotateTetrisPiece(); break;
+        case 'right': moveTetrisPiece(1, 0); break;
+        case 'down': moveTetrisPiece(0, 1); break;
+        case 'left': moveTetrisPiece(-1, 0); break;
+        case 'rotate': rotateTetrisPiece(); break;
+        case 'drop': while(moveTetrisPiece(0, 1)); break;
+      }
+    }
+  }
+
+  ctrlUp.addEventListener('click', (e) => { e.preventDefault(); handleControl('up'); });
+  ctrlDown.addEventListener('click', (e) => { e.preventDefault(); handleControl('down'); });
+  ctrlLeft.addEventListener('click', (e) => { e.preventDefault(); handleControl('left'); });
+  ctrlRight.addEventListener('click', (e) => { e.preventDefault(); handleControl('right'); });
+  ctrlRotate.addEventListener('click', (e) => { e.preventDefault(); handleControl('rotate'); });
+  ctrlDrop.addEventListener('click', (e) => { e.preventDefault(); handleControl('drop'); });
 
   initGame();
 });
