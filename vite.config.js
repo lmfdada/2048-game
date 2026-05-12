@@ -2,7 +2,7 @@ import { defineConfig } from 'vite';
 import legacy from '@vitejs/plugin-legacy';
 
 export default defineConfig({
-  base: './',
+  base: '/2048-game/',
   server: {
     host: true,
     port: 5173,
