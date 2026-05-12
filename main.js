@@ -106,6 +106,25 @@ document.addEventListener('DOMContentLoaded', () => {
 
   bestScoreEl.textContent = bestScore;
 
+  // Prevent default scrolling on touch events for the game area
+  document.addEventListener('touchmove', (e) => {
+    if (e.target.closest('.game-board-container') || 
+        e.target.closest('.snake-board-container') || 
+        e.target.closest('.tetris-board-container')) {
+      e.preventDefault();
+    }
+  }, { passive: false });
+
+  // Prevent zooming on double tap
+  let lastTouchEnd = 0;
+  document.addEventListener('touchend', (e) => {
+    const now = (new Date()).getTime();
+    if (now - lastTouchEnd <= 300) {
+      e.preventDefault();
+    }
+    lastTouchEnd = now;
+  }, false);
+
   function initGame() {
     stopAllGames();
     const selectedGame = gameSelect.value;
@@ -483,6 +502,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
   gameSelect.addEventListener('change', (e) => {
     initGame();
+  });
+
+  // Handle window resize for canvases
+  window.addEventListener('resize', () => {
+    if (currentGame === 'snake') drawSnake();
+    if (currentGame === 'tetris') drawTetris();
   });
 
   function addRandomTile() {
