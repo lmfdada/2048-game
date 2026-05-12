@@ -51,6 +51,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const tetrisMessageText = document.getElementById('tetris-message-text');
   const tetrisRetryBtn = document.getElementById('tetris-retry-btn');
   const gameInstructions = document.getElementById('game-instructions');
+  const difficultySelect = document.getElementById('difficulty-select');
 
   // Mobile control elements
   const mobileControls = document.getElementById('mobile-controls');
@@ -223,8 +224,17 @@ document.addEventListener('DOMContentLoaded', () => {
     gameMessage.classList.remove('game-over', 'game-won');
     tileContainer.innerHTML = '';
     
-    addRandomTile();
-    addRandomTile();
+    const difficulty = difficultySelect.value;
+    if (difficulty === 'easy') {
+      addRandomTile();
+      addRandomTile();
+      addRandomTile(); // Easy starts with 3 tiles
+    } else if (difficulty === 'hard') {
+      addRandomTile(); // Hard starts with only 1 tile
+    } else {
+      addRandomTile();
+      addRandomTile();
+    }
     renderBoard();
   }
 
@@ -242,6 +252,11 @@ document.addEventListener('DOMContentLoaded', () => {
     bestScoreEl.textContent = bestScore;
     snakeMessage.classList.remove('game-over');
     
+    const difficulty = difficultySelect.value;
+    if (difficulty === 'easy') snakeSpeed = 200;
+    else if (difficulty === 'hard') snakeSpeed = 80;
+    else snakeSpeed = 140;
+
     createFood();
     startSnakeLoop();
   }
@@ -253,7 +268,11 @@ document.addEventListener('DOMContentLoaded', () => {
     bestScore = localStorage.getItem('tetris-best-score') || 0;
     bestScoreEl.textContent = bestScore;
     tetrisMessage.classList.remove('game-over');
-    tetrisSpeed = 800;
+    
+    const difficulty = difficultySelect.value;
+    if (difficulty === 'easy') tetrisSpeed = 1000;
+    else if (difficulty === 'hard') tetrisSpeed = 400;
+    else tetrisSpeed = 800;
     
     spawnTetrisPiece();
     startTetrisLoop();
@@ -545,6 +564,10 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   gameSelect.addEventListener('change', (e) => {
+    initGame();
+  });
+
+  difficultySelect.addEventListener('change', (e) => {
     initGame();
   });
 
