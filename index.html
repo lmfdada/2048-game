@@ -5,13 +5,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>2048 - Premium Edition</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
-    <script type="module" crossorigin src="./assets/index-BOVq0rwn.js"></script>
-    <link rel="stylesheet" crossorigin href="./assets/index-DF8PWtZg.css">
+    <script type="module" crossorigin src="./assets/index-DlrBFx2N.js"></script>
+    <link rel="stylesheet" crossorigin href="./assets/index-yDImIw6A.css">
   </head>
   <body>
     <div class="game-container">
+      <div class="game-selector">
+        <select id="game-select" class="game-select">
+          <option value="2048" selected>2048</option>
+          <option value="snake">贪吃蛇 (Snake)</option>
+          <option value="tetris">俄罗斯方块 (Tetris)</option>
+        </select>
+      </div>
+
       <header class="header">
-        <h1 class="title">2048</h1>
+        <h1 class="title" id="game-title">2048</h1>
         <div class="scores">
           <div class="score-container">
             <div class="score-label">SCORE</div>
@@ -25,29 +33,59 @@
       </header>
 
       <div class="controls">
-        <p class="subtitle">Join the numbers and get to the <strong>2048 tile!</strong></p>
+        <p class="subtitle" id="game-subtitle">Join the numbers and get to the <strong>2048 tile!</strong></p>
         <button class="restart-btn" id="restart-btn">New Game</button>
       </div>
 
-      <div class="game-board-container">
-        <div class="game-board" id="game-board">
-          <!-- Background Grid Cells -->
-          <div class="grid-cell"></div><div class="grid-cell"></div><div class="grid-cell"></div><div class="grid-cell"></div>
-          <div class="grid-cell"></div><div class="grid-cell"></div><div class="grid-cell"></div><div class="grid-cell"></div>
-          <div class="grid-cell"></div><div class="grid-cell"></div><div class="grid-cell"></div><div class="grid-cell"></div>
-          <div class="grid-cell"></div><div class="grid-cell"></div><div class="grid-cell"></div><div class="grid-cell"></div>
-        </div>
-        <div class="tile-container" id="tile-container">
-          <!-- Tiles will be dynamically injected here -->
-        </div>
+      <div class="game-view" id="game-2048">
+        <div class="game-board-container">
+          <div class="game-board" id="game-board">
+            <!-- Background Grid Cells -->
+            <div class="grid-cell"></div><div class="grid-cell"></div><div class="grid-cell"></div><div class="grid-cell"></div>
+            <div class="grid-cell"></div><div class="grid-cell"></div><div class="grid-cell"></div><div class="grid-cell"></div>
+            <div class="grid-cell"></div><div class="grid-cell"></div><div class="grid-cell"></div><div class="grid-cell"></div>
+            <div class="grid-cell"></div><div class="grid-cell"></div><div class="grid-cell"></div><div class="grid-cell"></div>
+          </div>
+          <div class="tile-container" id="tile-container">
+            <!-- Tiles will be dynamically injected here -->
+          </div>
 
-        <div class="game-message" id="game-message">
-          <p id="game-message-text">Game Over!</p>
-          <div class="lower">
-            <button class="retry-btn" id="retry-btn">Try again</button>
+          <div class="game-message" id="game-message">
+            <p id="game-message-text">Game Over!</p>
+            <div class="lower">
+              <button class="retry-btn" id="retry-btn">Try again</button>
+            </div>
           </div>
         </div>
       </div>
+
+      <div class="game-view hidden" id="game-snake">
+        <div class="snake-board-container">
+          <canvas id="snake-canvas"></canvas>
+          <div class="game-message" id="snake-message">
+            <p id="snake-message-text">Game Over!</p>
+            <div class="lower">
+              <button class="retry-btn" id="snake-retry-btn">Try again</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="game-view hidden" id="game-tetris">
+        <div class="tetris-board-container">
+          <canvas id="tetris-canvas"></canvas>
+          <div class="game-message" id="tetris-message">
+            <p id="tetris-message-text">Game Over!</p>
+            <div class="lower">
+              <button class="retry-btn" id="tetris-retry-btn">Try again</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <footer class="game-instructions" id="game-instructions">
+        <!-- Instructions will be dynamically injected here -->
+      </footer>
     </div>
     
   </body>
