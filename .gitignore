@@ -4,3 +4,4 @@ dist
 *.local
 .gh-config
 .vercel
+.env*.local
